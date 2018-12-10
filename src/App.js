@@ -1,26 +1,35 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import { Switch, Route } from "react-router-dom";
+import Nav from "./components/Nav";
+import Home from "./components/Home";
+import SecondPage from "./components/SecondPage";
+import Hammer from "react-hammerjs";
+
+const handleTap = () => {
+  console.log("tap");
+};
+
+// const handleSwipe = () => {
+//   console.log("swipe");
+// };
 
 class App extends Component {
+  // handleSwipe = () => {
+  //   this.setState({ redirect: true });
+  // };
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Hammer onTap={handleTap} onSwipe={this.handleSwipe}>
+        <div className="App">
+          <Nav />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/second" component={SecondPage} />
+          </Switch>
+        </div>
+      </Hammer>
     );
   }
 }
